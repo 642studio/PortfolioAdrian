@@ -98,8 +98,12 @@ const handleAnchorClick = (href: string) => {
       gap: var(--space-sm);
       position: absolute;
       top: calc(env(safe-area-inset-top) + 12px);
-      left: 0;
-      right: 0;
+      left: clamp(10px, 3vw, 16px);
+      right: clamp(10px, 3vw, 16px);
+      width: auto;
+      max-width: none;
+      min-width: 0;
+      box-sizing: border-box;
       padding-top: 0;
       padding-bottom: calc(env(safe-area-inset-bottom) + 12px);
       pointer-events: none;
@@ -109,6 +113,8 @@ const handleAnchorClick = (href: string) => {
         top: auto;
         left: auto;
         right: auto;
+        width: auto;
+        max-width: none;
         grid-column: 2 / 10;
         align-items: flex-start;
         justify-content: center;
@@ -127,6 +133,7 @@ const handleAnchorClick = (href: string) => {
     pointer-events: auto;
     width: 100%;
     max-width: min(640px, 100%);
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -137,6 +144,7 @@ const handleAnchorClick = (href: string) => {
     backdrop-filter: blur(8px);
     box-shadow: 0 28px 48px rgba(0, 0, 0, 0.4);
     padding: clamp(12px, 2vw, 20px);
+    overflow: hidden;
   }
 
   &-logo {
@@ -152,6 +160,8 @@ const handleAnchorClick = (href: string) => {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    min-width: 0;
+    max-width: 100%;
   }
 
   &-title {
@@ -167,16 +177,19 @@ const handleAnchorClick = (href: string) => {
     color: var(--color-accent-300);
     font-size: clamp(13px, 1.5vw, 15px);
     letter-spacing: 0.02em;
-    max-width: 70ch;
+    max-width: 100%;
     font-weight: 700;
+    line-height: 1.25;
     text-wrap: pretty;
+    overflow-wrap: anywhere;
   }
 
   &-value {
     color: var(--color-text-200);
     line-height: var(--line-height-copy);
-    max-width: 48ch;
+    max-width: 100%;
     text-wrap: pretty;
+    overflow-wrap: anywhere;
   }
 
   &-ctas {
@@ -185,6 +198,7 @@ const handleAnchorClick = (href: string) => {
     gap: var(--space-xs);
     margin-top: 4px;
     pointer-events: auto;
+    min-width: 0;
 
     @include mixins.mq("md") {
       gap: var(--space-sm);
@@ -206,6 +220,7 @@ const handleAnchorClick = (href: string) => {
     gap: 8px;
     opacity: 0.7;
     cursor: not-allowed;
+    min-width: 0;
 
     span {
       font-size: var(--font-size-xs);
@@ -213,6 +228,8 @@ const handleAnchorClick = (href: string) => {
       text-transform: uppercase;
       letter-spacing: 0.08em;
       font-weight: 700;
+      white-space: normal;
+      line-height: 1.1;
     }
   }
 }
