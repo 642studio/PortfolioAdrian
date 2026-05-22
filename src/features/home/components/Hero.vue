@@ -76,9 +76,17 @@ const handleAnchorClick = (href: string) => {
   pointer-events: none;
 
   &-content {
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    align-items: flex-start;
+    justify-content: flex-start;
     height: 100%;
+    align-content: flex-start;
+
+    @include mixins.mq("md") {
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+    }
 
     &-inner {
       transform-origin: center center;
@@ -88,12 +96,19 @@ const handleAnchorClick = (href: string) => {
       align-items: center;
       justify-content: flex-start;
       gap: var(--space-sm);
-      position: relative;
-      padding-top: calc(env(safe-area-inset-top) + var(--height-header) + 8px);
+      position: absolute;
+      top: calc(env(safe-area-inset-top) + 12px);
+      left: 0;
+      right: 0;
+      padding-top: 0;
       padding-bottom: calc(env(safe-area-inset-bottom) + 12px);
       pointer-events: none;
 
       @include mixins.mq("md") {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
         grid-column: 2 / 10;
         align-items: flex-start;
         justify-content: center;
