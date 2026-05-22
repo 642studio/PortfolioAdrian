@@ -66,8 +66,9 @@ const handleAnchorClick = (href: string) => {
 
 <style scoped lang="scss">
 .hero {
-  max-height: calc(var(--lvh) * 100);
-  height: calc(var(--lvh) * 100);
+  max-height: calc(var(--dvh) * 100);
+  min-height: calc(var(--dvh) * 100);
+  height: calc(var(--dvh) * 100);
   width: 100%;
   display: flex;
   position: relative;
@@ -84,16 +85,21 @@ const handleAnchorClick = (href: string) => {
       grid-column: 1 / 13;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-      gap: var(--space-md);
+      align-items: center;
+      justify-content: flex-start;
+      gap: var(--space-sm);
       position: relative;
-      padding-top: clamp(64px, 12vh, 140px);
+      padding-top: calc(env(safe-area-inset-top) + var(--height-header) + 8px);
+      padding-bottom: calc(env(safe-area-inset-bottom) + 12px);
       pointer-events: none;
 
       @include mixins.mq("md") {
         grid-column: 2 / 10;
+        align-items: flex-start;
+        justify-content: center;
         gap: var(--space-md);
+        padding-top: clamp(56px, 8vh, 96px);
+        padding-bottom: 0;
       }
 
       @include mixins.mq("xl") {
@@ -104,6 +110,7 @@ const handleAnchorClick = (href: string) => {
 
   &-panel {
     pointer-events: auto;
+    width: 100%;
     max-width: min(640px, 100%);
     display: flex;
     flex-direction: column;
