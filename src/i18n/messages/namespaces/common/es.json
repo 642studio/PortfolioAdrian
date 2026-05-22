@@ -1,0 +1,21 @@
+{
+  "back-to-home": "Volver al inicio",
+  "contact": "Contacto",
+  "disable-sounds": "Desactivar sonido",
+  "enable-sounds": "Activar sonido",
+  "get-in-touch": "Hablemos",
+  "go-to": "Ir a",
+  "legal": "Legal",
+  "live-view": "Ver Sistema",
+  "music-produced-by": "Música por",
+  "next-project": "Siguiente Sistema",
+  "privacy": "Privacidad",
+  "source-code": "Código Fuente",
+  "start-a-new-project": "Iniciar un nuevo proyecto",
+  "switch-to-project": "Abrir {project}",
+  "build-nav": "Construcción",
+  "veridis-nav": "VERIDIS",
+  "systems-nav": "Sistemas",
+  "stack-nav": "Stack",
+  "contact-nav": "Contacto"
+}
