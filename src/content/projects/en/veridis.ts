@@ -4,8 +4,6 @@ export default {
   title: "VERIDIS",
   theme: "dark",
   tags: ["backend", "ai-automation", "infrastructure", "computer-vision", "event-driven"],
-  live: "https://642studio.com",
-  source: "https://github.com/642studio/veridis",
   description:
     "VERIDIS is a modular, event-driven operating system that centralizes AI automation, computer vision, media workflows, operational memory and infrastructure for 642 Studio.",
   components: [

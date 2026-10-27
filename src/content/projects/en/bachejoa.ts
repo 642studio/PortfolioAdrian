@@ -4,8 +4,6 @@ export default {
   title: "Bachejoa",
   theme: "dark",
   tags: ["nextjs", "supabase", "civic-tech", "security", "typescript"],
-  live: "https://bachejoa.com",
-  source: "https://github.com/642studio/bachejoa",
   description:
     "Full-stack civic operations platform for reporting and resolving urban incidents in Navojoa through geolocated evidence and operational dashboards.",
   components: [
@@ -26,7 +24,13 @@ export default {
       type: "list",
       props: {
         title: "Security and Governance",
-        items: ["CSRF protection", "Rate limiting", "HttpOnly cookies", "Security headers and CSP", "Operational audit logs"],
+        items: [
+          "CSRF protection",
+          "Rate limiting",
+          "HttpOnly cookies",
+          "Security headers and CSP",
+          "Operational audit logs",
+        ],
       },
     },
   ],

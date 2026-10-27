@@ -35,6 +35,11 @@ export default defineConfig({
     rollupOptions: {
       output: {
         inlineDynamicImports: false,
+        manualChunks(id) {
+          if (id.includes("node_modules/three/")) return "three";
+          if (id.includes("node_modules/gsap/")) return "motion";
+          if (id.includes("node_modules/@vue/") || id.includes("node_modules/vue/")) return "vue";
+        },
         assetFileNames: "assets/[hash].[ext]",
         entryFileNames: "chunks/[name]-[hash].js",
         chunkFileNames: "chunks/[hash].js",

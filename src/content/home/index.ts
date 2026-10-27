@@ -7,19 +7,19 @@ const homeContent: Record<Locale, HomeContent> = {
   en: {
     hero: {
       name: "Adrián Yépiz",
-      role: "Software Engineering Student · Backend Systems Developer · AI Automation Architect",
+      role: "Founder at 642 Studio · Creative Direction · Software & AI",
       valueProp:
-        "I design and build backend systems, AI automations and digital infrastructure that turn operational complexity into scalable execution.",
+        "I connect business strategy, creativity and software to turn ideas into digital products and better ways of working.",
       ctas: [
-        { label: "View Systems", href: "#systems", type: "anchor" },
-        { label: "Contact", href: "#contact", type: "anchor" },
-        { label: "GitHub", href: "https://github.com/642studio", type: "external" },
-        { label: "Download CV", href: "#", type: "disabled", note: "Coming soon" },
+        { label: "Explore my work", href: "#systems", type: "anchor" },
+        { label: "Let’s talk", href: "#contact", type: "anchor" },
+
+        { label: "Download CV ↓", href: "/cv/Adrian-Yepiz-EN.pdf", type: "external" },
       ],
     },
     whatIBuild: {
       title: "What I Build",
-      intro: "I deliver production-grade systems for business operations, municipal workflows and internal teams.",
+      intro: "I connect creative direction, software development and AI to build digital products and improve how teams work.",
       capabilities: [
         {
           title: "Backend Systems",
@@ -75,7 +75,8 @@ const homeContent: Record<Locale, HomeContent> = {
         },
         {
           name: "VERIDIS Vision",
-          description: "Computer vision module using YOLOv8/OpenCV for motion, person, tamper and camera-offline detection.",
+          description:
+            "Computer vision module using YOLOv8/OpenCV for motion, person, tamper and camera-offline detection.",
         },
         {
           name: "Console Bridge",
@@ -116,7 +117,8 @@ const homeContent: Record<Locale, HomeContent> = {
       directory: [
         {
           name: "VeridisMI",
-          description: "Media intelligence backend that transforms business briefs into scored and optimized production plans.",
+          description:
+            "Media intelligence backend that transforms business briefs into scored and optimized production plans.",
         },
         {
           name: "EnvautoAPI",
@@ -146,7 +148,18 @@ const homeContent: Record<Locale, HomeContent> = {
       groups: [
         {
           name: "Backend",
-          items: ["Node.js", "Fastify", "Express", "Java", "PostgreSQL", "Prisma", "Drizzle ORM", "REST APIs", "JWT Auth", "Zod"],
+          items: [
+            "Node.js",
+            "Fastify",
+            "Express",
+            "Java",
+            "PostgreSQL",
+            "Prisma",
+            "Drizzle ORM",
+            "REST APIs",
+            "JWT Auth",
+            "Zod",
+          ],
         },
         {
           name: "Frontend",
@@ -154,7 +167,16 @@ const homeContent: Record<Locale, HomeContent> = {
         },
         {
           name: "AI & Automation",
-          items: ["GPT APIs", "n8n", "Make", "Webhooks", "ManyChat", "Structured JSON", "Realtime API", "Agent Workflows"],
+          items: [
+            "GPT APIs",
+            "n8n",
+            "Make",
+            "Webhooks",
+            "ManyChat",
+            "Structured JSON",
+            "Realtime API",
+            "Agent Workflows",
+          ],
         },
         {
           name: "Computer Vision",
@@ -209,19 +231,19 @@ const homeContent: Record<Locale, HomeContent> = {
   es: {
     hero: {
       name: "Adrián Yépiz",
-      role: "Estudiante de Ingeniería en Software · Desarrollador de Sistemas Backend · Arquitecto de Automatización con IA",
+      role: "Fundador de 642 Studio · Dirección creativa · Software e IA",
       valueProp:
-        "Diseño y construyo sistemas backend, automatizaciones con IA e infraestructura digital que convierten complejidad operativa en ejecución escalable.",
+        "Conecto estrategia, creatividad y software para convertir ideas en productos digitales y mejores formas de trabajar.",
       ctas: [
-        { label: "Ver Sistemas", href: "#systems", type: "anchor" },
-        { label: "Contacto", href: "#contact", type: "anchor" },
-        { label: "GitHub", href: "https://github.com/642studio", type: "external" },
-        { label: "Descargar CV", href: "#", type: "disabled", note: "Próximamente" },
+        { label: "Explorar proyectos", href: "#systems", type: "anchor" },
+        { label: "Conversemos", href: "#contact", type: "anchor" },
+
+        { label: "Descargar CV ↓", href: "/cv/Adrian-Yepiz-ES.pdf", type: "external" },
       ],
     },
     whatIBuild: {
       title: "Lo que construyo",
-      intro: "Entrego sistemas en producción para operación empresarial, flujos municipales y equipos internos.",
+      intro: "Conecto dirección creativa, desarrollo de software e IA para construir productos digitales y mejorar cómo trabajan los equipos.",
       capabilities: [
         {
           title: "Sistemas Backend",
@@ -277,7 +299,8 @@ const homeContent: Record<Locale, HomeContent> = {
         },
         {
           name: "VERIDIS Vision",
-          description: "Módulo de visión con YOLOv8/OpenCV para movimiento, personas, tamper y detección de cámara offline.",
+          description:
+            "Módulo de visión con YOLOv8/OpenCV para movimiento, personas, tamper y detección de cámara offline.",
         },
         {
           name: "Console Bridge",
@@ -299,7 +322,8 @@ const homeContent: Record<Locale, HomeContent> = {
     },
     selectedSystems: {
       title: "Sistemas seleccionados",
-      intro: "Cuatro sistemas en producción entre govtech, operación cívica, SaaS financiero y workflows de medios con IA.",
+      intro:
+        "Cuatro sistemas en producción entre govtech, operación cívica, SaaS financiero y workflows de medios con IA.",
     },
     architectureAutomation: {
       title: "Arquitectura y Automatización",
@@ -318,15 +342,18 @@ const homeContent: Record<Locale, HomeContent> = {
       directory: [
         {
           name: "VeridisMI",
-          description: "Backend de inteligencia de medios que convierte briefs de negocio en planes de producción puntuados y optimizados.",
+          description:
+            "Backend de inteligencia de medios que convierte briefs de negocio en planes de producción puntuados y optimizados.",
         },
         {
           name: "EnvautoAPI",
-          description: "API de orquestación asíncrona para pipelines de generación de assets con IA y trazabilidad de jobs.",
+          description:
+            "API de orquestación asíncrona para pipelines de generación de assets con IA y trazabilidad de jobs.",
         },
         {
           name: "VeridisConsole",
-          description: "Interfaz operativa en terminal para métricas del sistema, eventos y retroalimentación de ejecución.",
+          description:
+            "Interfaz operativa en terminal para métricas del sistema, eventos y retroalimentación de ejecución.",
         },
       ],
     },
@@ -348,7 +375,18 @@ const homeContent: Record<Locale, HomeContent> = {
       groups: [
         {
           name: "Backend",
-          items: ["Node.js", "Fastify", "Express", "Java", "PostgreSQL", "Prisma", "Drizzle ORM", "REST APIs", "JWT Auth", "Zod"],
+          items: [
+            "Node.js",
+            "Fastify",
+            "Express",
+            "Java",
+            "PostgreSQL",
+            "Prisma",
+            "Drizzle ORM",
+            "REST APIs",
+            "JWT Auth",
+            "Zod",
+          ],
         },
         {
           name: "Frontend",
@@ -356,7 +394,16 @@ const homeContent: Record<Locale, HomeContent> = {
         },
         {
           name: "IA y Automatización",
-          items: ["GPT APIs", "n8n", "Make", "Webhooks", "ManyChat", "JSON estructurado", "Realtime API", "Agent Workflows"],
+          items: [
+            "GPT APIs",
+            "n8n",
+            "Make",
+            "Webhooks",
+            "ManyChat",
+            "JSON estructurado",
+            "Realtime API",
+            "Agent Workflows",
+          ],
         },
         {
           name: "Visión Computacional",
@@ -387,7 +434,8 @@ const homeContent: Record<Locale, HomeContent> = {
       items: [
         {
           title: "Construyendo VERIDIS",
-          description: "Diseño de un sistema operativo orientado a eventos para operación interna y servicios modulares.",
+          description:
+            "Diseño de un sistema operativo orientado a eventos para operación interna y servicios modulares.",
         },
         {
           title: "Diseño de plataformas financieras multi-tenant",
@@ -405,7 +453,8 @@ const homeContent: Record<Locale, HomeContent> = {
     },
     contact: {
       title: "Construyamos sistemas operativos que escalen.",
-      description: "Disponible para colaboraciones en arquitectura backend, automatización con IA y plataformas operativas.",
+      description:
+        "Disponible para colaboraciones en arquitectura backend, automatización con IA y plataformas operativas.",
     },
   },
 };

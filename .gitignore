@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Original cloud-managed dependencies retained during local verification
+node_modules.icloud-backup/

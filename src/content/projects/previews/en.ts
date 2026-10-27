@@ -1,7 +1,7 @@
-import thumbnailCardonSense from "../../../assets/thumbnails/cardonsense-thumb.png";
-import thumbnailBachejoa from "../../../assets/thumbnails/bachejoa-thumb.png";
-import thumbnailVeridisFinance from "../../../assets/thumbnails/veridisfinance-thumb.png";
-import thumbnailVeridisClip from "../../../assets/thumbnails/veridisclip-thumb.png";
+const thumbnailCardonSense = "/work/cardonsense.jpg";
+const thumbnailBachejoa = "/work/bachejoa.jpg";
+const thumbnailVeridisFinance = "/work/veridisfinance.jpg";
+const thumbnailVeridisClip = "/work/veridisclip.jpg";
 
 import type { ProjectPreview } from "../../types";
 

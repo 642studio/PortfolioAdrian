@@ -4,8 +4,6 @@ export default {
   title: "VeridisClip",
   theme: "dark",
   tags: ["ai-automation", "media-intelligence", "async-api", "typescript", "saas"],
-  live: "https://veridisclip.example.com",
-  source: "https://github.com/642studio/veridisclip",
   description:
     "AI-powered video clipping platform that transforms long-form content into structured, scored and publish-ready clip pipelines.",
   components: [

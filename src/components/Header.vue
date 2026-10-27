@@ -1,239 +1,211 @@
 <script setup lang="ts">
-import Button from "./Button.vue";
-import Logo from "./Logo.vue";
-import { computed, ref } from "vue";
-import { t } from "../i18n/utils/translate";
-import { useHeaderTheme } from "../composables/useHeaderTheme";
-import { lenis } from "../composables/useScroll";
+import { computed, ref, watch } from "vue";
+import { locale } from "../i18n/store";
 import { projectId } from "../composables/useRouteObserver";
-import { social } from "../content/social";
-import ButtonRound from "./ButtonRound.vue";
-import ArrowRight from "./icons/ArrowRight.vue";
-import SoundsToggle from "./SoundsToggle.vue";
-import { isFeatureEnabled } from "../utils/features";
-import { useRouter } from "../composables/useRouter";
-import { useFirstRoute } from "../composables/useFirstRoute";
-
-const router = useRouter();
-const { isFirstRoute } = useFirstRoute();
-
-const scrolledPastHeroVisible = ref(false);
-const { isDarkTheme } = useHeaderTheme({
-  onUpdate: (element, boundingClientRect, hasScrolledIntoView) => {
-    if (!element || !boundingClientRect) {
-      scrolledPastHeroVisible.value = false;
-      return;
-    }
-
-    if (hasScrolledIntoView) {
-      scrolledPastHeroVisible.value = true;
-    } else {
-      scrolledPastHeroVisible.value = false;
-    }
-  },
+import { lenis } from "../composables/useScroll";
+const open = ref(false);
+const es = computed(() => locale.value === "es");
+const links = computed(() => [
+  { id: "systems", label: es.value ? "Proyectos" : "Work" },
+  { id: "build", label: es.value ? "Enfoque" : "Approach" },
+  { id: "about", label: es.value ? "Sobre mí" : "About" },
+  { id: "contact", label: es.value ? "Contacto" : "Contact" },
+]);
+function navigate(event: MouseEvent, id: string) {
+  open.value = false;
+  if (projectId.value) return;
+  event.preventDefault();
+  if (lenis.value) {
+    lenis.value.start();
+    lenis.value.scrollTo("#" + id, { offset: -90 });
+  } else document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+}
+watch(open, (value) => {
+  if (value) lenis.value?.stop();
+  else lenis.value?.start();
 });
-
-const handleBackClick = () => {
-  // If it's the first route the user visited, navigate to home
-  // Otherwise, go back in browser history
-  if (isFirstRoute.value) {
-    router.push("/");
-  } else {
-    router.back();
-  }
-};
-
-const handleLogoClick = () => {
-  if (!lenis.value) return;
-  lenis.value.scrollTo(0);
-};
-
-const classNames = computed(() => {
-  return {
-    header: true,
-    "header-dark": isDarkTheme.value,
-    "header-scrolled": scrolledPastHeroVisible.value,
-    [`project-${projectId.value}`]: projectId.value !== null,
-  };
-});
-
-const getInTouchClassNames = computed(() => {
-  return {
-    "header-get-in-touch": true,
-    "header-get-in-touch-isProjectPage": projectId.value !== null,
-  };
-});
+watch(projectId, () => (open.value = false));
 </script>
-
 <template>
-  <header :class="classNames">
-    <div class="header-left">
-      <ButtonRound
-        v-if="projectId !== null"
-        variant="accent"
-        @click="handleBackClick"
-        :aria-label="t('back-to-home')"
-        :class="{ 'header-back': true, 'header-back-isProjectPage': projectId !== null }"
-        data-cursor="circle-white"
-        data-sound="click"
-        data-hoversound="hover"
+  <a class="skip-link" :href="projectId ? '#project-main' : '#main-content'">{{
+    es ? "Saltar al contenido" : "Skip to content"
+  }}</a>
+  <header class="site-header">
+    <a class="personal-mark" href="/" aria-label="642 Studio · Inicio"><img src="/brand/642-logo-white.png" alt="642 Studio" width="126" height="126" /></a>
+    <nav class="desktop-nav" :aria-label="es ? 'Navegación principal' : 'Main navigation'">
+      <a v-for="link in links" :key="link.id" :href="'/#' + link.id" @click="navigate($event, link.id)">{{
+        link.label
+      }}</a>
+    </nav>
+    <div class="header-actions">
+      <button
+        class="language"
+        @click="locale = es ? 'en' : 'es'"
+        :aria-label="es ? 'Switch to English' : 'Cambiar a español'"
       >
-        <ArrowRight class="header-back-icon" />
-      </ButtonRound>
+        {{ es ? "EN" : "ES" }} <span aria-hidden="true">↗</span>
+      </button>
+      <a class="header-mail" href="mailto:adrian@642studio.com"
+        >{{ es ? "Conversemos" : "Let’s talk" }} <span aria-hidden="true">↗</span></a
+      >
+      <button
+        class="menu-toggle"
+        :aria-expanded="open"
+        aria-controls="mobile-navigation"
+        @click="open = !open"
+        :aria-label="es ? 'Menú de navegación' : 'Navigation menu'"
+      >
+        {{ open ? "×" : "☰" }}
+      </button>
     </div>
-    <div
-      :class="{
-        'header-logo': true,
-        'header-logo-isProjectPage': projectId !== null,
-        'header-logo-clickable': scrolledPastHeroVisible,
-        'children-unclickable': true,
-      }"
-      @click="handleLogoClick"
-      data-sound="click"
-      data-hoversound="hover"
-      data-cursor="circle-white"
+    <nav
+      v-if="open"
+      id="mobile-navigation"
+      class="mobile-nav"
+      :aria-label="es ? 'Navegación móvil' : 'Mobile navigation'"
+      @keydown.esc="open = false"
     >
-      <Logo class="header-logo-image" />
-    </div>
-    <div class="header-right">
-      <Button
-        renderAs="a"
-        variant="accent"
-        :aria-label="t('get-in-touch')"
-        :href="social.find((item) => item.name === 'mail')?.url ?? ''"
-        external
-        :class="getInTouchClassNames"
-        data-cursor="circle-white"
-        data-hoversound="hover"
-        >{{ t("get-in-touch") }}</Button
+      <a v-for="link in links" :key="link.id" :href="'/#' + link.id" @click="navigate($event, link.id)"
+        >{{ link.label }} <span aria-hidden="true">↗</span></a
       >
-      <SoundsToggle class="header-sounds-toggle" :isDarkTheme="isDarkTheme" v-if="isFeatureEnabled('sounds')" />
-    </div>
+      <a :href="es ? '/cv/Adrian-Yepiz-ES.pdf' : '/cv/Adrian-Yepiz-EN.pdf'" target="_blank" rel="noopener"
+        >{{ es ? "Descargar CV" : "Download CV" }} ↓</a
+      >
+    </nav>
   </header>
 </template>
-
-<style scoped lang="scss">
-.header {
+<style scoped>
+.site-header {
   position: fixed;
-  top: 0;
+  z-index: 95;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 1280px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
+  padding: 12px 16px 12px 24px;
+  border: 1px solid #ffffff24;
+  background: #171819ed;
+  backdrop-filter: blur(18px);
+  border-radius: 16px;
+  color: #f6f0e8;
+  box-shadow: 0 8px 32px #0002;
+}
+.personal-mark {
+  position: relative;
+  display: block;
+  width: 88px;
+  height: 44px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.personal-mark img {
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: var(--breakpoint-xxxl);
-  padding: 0 var(--space-outer);
-  max-width: 100%;
-  z-index: var(--z-index-header);
-  height: var(--height-header);
-  pointer-events: none;
-
-  --scrolled: 0;
-
-  &-scrolled {
-    --scrolled: 1;
+  width: 126px;
+  height: 126px;
+  max-width: none;
+  transform: translate(-50%, -50%);
+}
+.desktop-nav {
+  display: flex;
+  gap: 30px;
+}
+.desktop-nav a {
+  font-size: 13px;
+  color: #e1ddd7;
+  text-decoration: none;
+}
+.desktop-nav a:hover {
+  color: #ff7777;
+}
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.language {
+  border: 0;
+  background: none;
+  color: #f6f0e8;
+  font: 12px var(--font-mono);
+  cursor: pointer;
+  min-height: 40px;
+  padding: 8px;
+}
+.language span {
+  color: #999;
+}
+.header-mail {
+  padding: 12px 18px;
+  border-radius: 9px;
+  background: #ff4b4b;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.header-mail span {
+  margin-left: 16px;
+}
+.menu-toggle {
+  display: none;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font-size: 23px;
+  width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+.mobile-nav {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 12px 24px;
+  background: #171819;
+  border: 1px solid #ffffff24;
+  border-radius: 16px;
+}
+.mobile-nav a {
+  padding: 18px 0;
+  color: #f5efe7;
+  border-bottom: 1px solid #fff2;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+}
+.mobile-nav a:last-child {
+  border: 0;
+  font-size: 14px;
+  color: #ff8c8c;
+}
+@media (max-width: 839px) {
+  .site-header {
+    top: 10px;
+    width: calc(100% - 24px);
+    padding: 6px 10px 6px 18px;
+    gap: 12px;
+    border-radius: 12px;
   }
-
-  &-back {
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease-in-out;
-    transition-delay: 0.1s;
-    pointer-events: auto;
-
-    &-icon {
-      width: 100%;
-      transform: rotate(180deg);
-    }
-
-    &-isProjectPage {
-      pointer-events: auto;
-      opacity: 1;
-    }
-  }
-
-  &-left {
-    position: absolute;
-    left: var(--space-outer);
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  &-get-in-touch {
-    width: fit-content;
-
-    &-isProjectPage {
-      opacity: 1 !important;
-    }
-  }
-
-  &-right {
-    position: absolute;
-    right: var(--space-outer);
-    top: 50%;
-    transform: translateY(-50%);
-    pointer-events: auto;
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-
-  &-music-toggle {
-    display: flex;
-  }
-
-  &-dark {
-    color: var(--color-white-400);
-    --icon-color: var(--color-white-400);
-  }
-
-  &-get-in-touch {
+  .desktop-nav,
+  .header-mail {
     display: none;
-
-    @include mixins.mq("md") {
-      display: flex;
-    }
   }
-
-  &-logo {
-    cursor: pointer;
-    display: flex;
-    gap: var(--space-xs);
-    transition: color 0.2s ease-in-out;
-    opacity: var(--scrolled);
-    pointer-events: none;
-
-    &-clickable {
-      pointer-events: all;
-    }
-
-    @include mixins.mq("md") {
-      gap: var(--space-sm);
-    }
-
-    &-isProjectPage {
-      transition: opacity 0.2s ease-in-out;
-      pointer-events: none;
-      opacity: 0;
-    }
-
-    &-image {
-      width: 108px;
-      filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.45));
-
-      @include mixins.mq("md") {
-        width: 128px;
-      }
-    }
-
-    &-text {
-      font-weight: 900;
-      font-size: 18px;
-
-      @include mixins.mq("md") {
-        font-size: 20px;
-      }
-    }
+  .menu-toggle {
+    display: block;
+  }
+  .header-actions {
+    gap: 6px;
   }
 }
 </style>

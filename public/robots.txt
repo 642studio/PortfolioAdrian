@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
-Disallow: /legal
-Disallow: /privacy
-Disallow: /es/legal
-Disallow: /es/privacy
+Sitemap: https://adrian.642studio.com/sitemap.xml

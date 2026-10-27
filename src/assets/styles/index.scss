@@ -64,3 +64,36 @@ body {
     pointer-events: none;
   }
 }
+
+:root {
+  --line-height-copy: 1.6;
+}
+:focus-visible {
+  outline: 3px solid #ff6969;
+  outline-offset: 5px;
+}
+section[id] {
+  scroll-margin-top: 100px;
+}
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 200;
+  background: #fff;
+  color: #111;
+  padding: 12px 18px;
+  transform: translateY(-180%);
+}
+.skip-link:focus {
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

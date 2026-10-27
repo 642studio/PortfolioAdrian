@@ -6,9 +6,17 @@ import { LOCALES } from "../constants";
 
 import type { Locale } from "../types";
 
+const safeStorageGet = () => {
+  try {
+    return window.localStorage.getItem("portfolio-locale");
+  } catch {
+    return null;
+  }
+};
+
 export const useTranslations = () => {
   onMounted(() => {
-    const stored = window.localStorage.getItem("portfolio-locale") as Locale | null;
+    const stored = safeStorageGet() as Locale | null;
     if (stored && stored in LOCALES) {
       locale.value = stored;
     } else {
@@ -24,14 +32,18 @@ export const useTranslations = () => {
 
   watch(locale, () => {
     if (!locale.value) return;
-    window.localStorage.setItem("portfolio-locale", locale.value);
+    try {
+      window.localStorage.setItem("portfolio-locale", locale.value);
+    } catch {}
+    document.documentElement.lang = locale.value;
   });
 
   watch(
     locale,
     async (newLocale) => {
       if (!newLocale) return;
-      translations.value = (await loadTranslations("common", newLocale)) ?? {};
+      const loaded = (await loadTranslations("common", newLocale)) ?? {};
+      if (locale.value === newLocale) translations.value = loaded;
     },
     { immediate: true },
   );

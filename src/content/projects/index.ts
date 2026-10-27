@@ -1,6 +1,15 @@
 import type { Locale } from "../../i18n/types";
 
-export const projectIds = ["veridis", "cardonsense", "bachejoa", "veridisfinance", "veridisclip"] as const;
+export const projectIds = [
+  "cibapac",
+  "642-core",
+  "paskolas",
+  "veridis",
+  "cardonsense",
+  "bachejoa",
+  "veridisfinance",
+  "veridisclip",
+] as const;
 
 function simplifyModules(glob: Record<string, any>) {
   const result: Record<string, any> = {};

@@ -44,7 +44,7 @@ const { withSocial = true } = defineProps<Props>();
           <div class="footer-top-links-legal">
             <Clickable renderAs="div">
               <Link
-                :href="locale === 'es' ? '/es/privacy' : '/privacy'"
+                :href="locale === 'es' ? '/es/privacy.html' : '/privacy.html'"
                 class="footer-link"
                 :external="true"
                 data-cursor="circle-white"
@@ -55,7 +55,7 @@ const { withSocial = true } = defineProps<Props>();
             </Clickable>
             <Clickable renderAs="div">
               <Link
-                :href="locale === 'es' ? '/es/legal' : '/legal'"
+                :href="locale === 'es' ? '/es/legal.html' : '/legal.html'"
                 class="footer-link children-unclickable"
                 :external="true"
                 data-cursor="circle-white"
@@ -69,12 +69,6 @@ const { withSocial = true } = defineProps<Props>();
         </div>
       </div>
       <div class="footer-credits">
-        <div class="footer-credits-music">
-          <p>
-            {{ t("music-produced-by") }}
-          </p>
-          <p class="footer-credits-music-owner">642STUDIO</p>
-        </div>
         <p>© {{ new Date().getFullYear() }} Adrián Yépiz · 642 Studio</p>
       </div>
     </div>

@@ -8,8 +8,8 @@ import Link from "../../../components/Link.vue";
 const content = computed(() => useHomeContent().hero);
 
 const handleAnchorClick = (href: string) => {
-  if (!lenis.value) return;
-  lenis.value.scrollTo(href);
+  if (lenis.value) lenis.value.scrollTo(href, { offset: -90 });
+  else document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
 };
 </script>
 
@@ -18,12 +18,13 @@ const handleAnchorClick = (href: string) => {
     <div class="hero-content grid">
       <div class="hero-content-inner" id="hero-content-inner">
         <div class="hero-panel">
-          <img src="/brand/642-logo-white.png" alt="642 Studio" class="hero-logo" />
+          <p class="hero-eyebrow">CREATIVITY × TECHNOLOGY × BUSINESS</p>
 
           <div class="hero-copy">
             <h1 class="hero-title">{{ content.name }}</h1>
             <p class="hero-role">{{ content.role }}</p>
             <p class="hero-value">{{ content.valueProp }}</p>
+            <p class="hero-location">Navojoa, Sonora · México</p>
           </div>
 
           <div class="hero-ctas">
@@ -231,6 +232,115 @@ const handleAnchorClick = (href: string) => {
       white-space: normal;
       line-height: 1.1;
     }
+  }
+}
+</style>
+
+<style scoped>
+.hero-panel {
+  max-width: 680px;
+  padding: clamp(24px, 3vw, 40px);
+  gap: 28px;
+  background: linear-gradient(135deg, rgba(14, 15, 17, 0.96), rgba(19, 20, 22, 0.88));
+  box-shadow: 0 24px 64px #0003;
+  border-radius: 24px;
+}
+.hero-eyebrow {
+  font: 10px var(--font-mono);
+  letter-spacing: 0.13em;
+  color: #d0cbc4;
+}
+.hero-title {
+  font-size: clamp(42px, 5vw, 70px);
+  letter-spacing: -0.055em;
+  line-height: 1.06;
+}
+.hero-role {
+  color: #ff7777;
+  font-size: 14px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+.hero-value {
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.6;
+  color: #eee9e2;
+  max-width: 42ch;
+}
+.hero-location {
+  font: 12px var(--font-mono);
+  color: #b7b2ab;
+  margin-top: 8px;
+}
+.hero-ctas {
+  gap: 12px;
+}
+.hero-content-inner {
+  grid-column: 2 / 9;
+}
+@media (max-width: 839px) {
+  .hero {
+    height: max(840px, 100svh);
+    min-height: max(840px, 100svh);
+    max-height: none;
+  }
+  .hero-content-inner {
+    top: 84px;
+    left: 18px;
+    right: 18px;
+  }
+  .hero-panel {
+    padding: 24px;
+    gap: 22px;
+  }
+  .hero-eyebrow {
+    font-size: 9px;
+  }
+  .hero-value {
+    font-size: 17px;
+  }
+  .hero-title {
+    font-size: 43px;
+  }
+  .hero-role {
+    font-size: 12px;
+  }
+}
+</style>
+
+<style scoped>
+@media (max-width: 839px) {
+  .hero-content-inner {
+    grid-column: 1 / -1;
+    align-items: stretch;
+    width: auto;
+    max-width: none;
+  }
+  .hero-panel {
+    max-width: none;
+    width: 100%;
+  }
+  .hero-ctas {
+    gap: 10px;
+  }
+  .hero-title {
+    font-size: 42px;
+  }
+  .hero-eyebrow {
+    letter-spacing: 0.08em;
+  }
+  .hero-cta-btn {
+    max-width: 100%;
+  }
+}
+</style>
+
+<style scoped>
+@media (min-width: 840px) and (max-height: 700px) {
+  .hero {
+    min-height: 700px;
+    height: 700px;
+    max-height: none;
   }
 }
 </style>

@@ -4,8 +4,6 @@ export default {
   title: "VeridisFinance",
   theme: "dark",
   tags: ["fastify", "postgresql", "multi-tenant", "saas", "ai-automation"],
-  live: "https://veridisfinance.example.com",
-  source: "https://github.com/642studio/veridisfinance",
   description:
     "Multi-tenant financial operations SaaS for SMBs, integrating transaction workflows, CFDI processing, planning and AI-assisted decision support.",
   components: [

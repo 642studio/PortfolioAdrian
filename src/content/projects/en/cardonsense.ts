@@ -4,8 +4,6 @@ export default {
   title: "CardonSense",
   theme: "dark",
   tags: ["nextjs", "typescript", "geospatial", "postgresql", "govtech"],
-  live: "https://cardonsense.com",
-  source: "https://github.com/642studio/cardonsense",
   description:
     "Territorial intelligence platform for municipalities that converts citizen reports and geospatial data into prioritized operational decisions.",
   components: [
